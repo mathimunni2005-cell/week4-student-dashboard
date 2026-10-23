@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A responsive student management dashboard built with HTML, CSS, and JavaScript.">
+  <title>Student Management Dashboard | Week 4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><div><strong>StudentHub</strong><small>Management portal</small></div></div>
+      <nav aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-link" href="#students">♙ <span>Students</span></a>
+      </nav>
+      <div class="sidebar-note"><span class="status-dot"></span> Local data storage enabled</div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div><p class="eyebrow">OVERVIEW</p><h1>Student Dashboard</h1><p class="subtitle">Manage student records in one place.</p></div>
+        <button class="primary-btn" id="addStudentTop" type="button">＋ Add Student</button>
+      </header>
+
+      <section class="stats-grid" aria-label="Student statistics">
+        <article class="stat-card"><div class="stat-icon violet">♙</div><div><p>Total Students</p><strong id="totalStudents">0</strong><small>All records</small></div></article>
+        <article class="stat-card"><div class="stat-icon green">✓</div><div><p>Active Students</p><strong id="activeStudents">0</strong><small>Currently active</small></div></article>
+        <article class="stat-card"><div class="stat-icon orange">▤</div><div><p>Courses</p><strong id="courseCount">0</strong><small>Unique courses</small></div></article>
+      </section>
+
+      <section class="panel" id="students">
+        <div class="panel-heading"><div><h2>Student Records</h2><p>Search, filter, edit, or remove a student.</p></div><span class="record-count" id="recordCount">0 records</span></div>
+        <div class="toolbar">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search name, email, or course..." aria-label="Search students"></label>
+          <select id="statusFilter" aria-label="Filter by status"><option value="all">All statuses</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select>
+          <select id="courseFilter" aria-label="Filter by course"><option value="all">All courses</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>STUDENT</th><th>COURSE</th><th>EMAIL</th><th>STATUS</th><th class="actions-heading">ACTIONS</th></tr></thead>
+            <tbody id="studentTableBody"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState"><div class="empty-icon">♙</div><h3>No students found</h3><p>Add a student or adjust your search filters.</p><button class="primary-btn" id="emptyAddBtn" type="button">＋ Add first student</button></div>
+        </div>
+        <div class="table-footer"><span id="footerCount">Showing 0 students</span><button class="text-btn" id="resetDemo" type="button">Reset demo data</button></div>
+      </section>
+      <footer>Week 4 Capstone Project · Built with HTML, CSS & JavaScript</footer>
+    </main>
+  </div>
+
+  <dialog id="studentDialog">
+    <form id="studentForm" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow">STUDENT DETAILS</p><h2 id="dialogTitle">Add Student</h2></div><button type="button" class="close-btn" id="closeDialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="studentId">
+      <label for="studentName">Full name <span>*</span></label><input id="studentName" name="studentName" type="text" placeholder="e.g. Ananya Reddy" required maxlength="70">
+      <label for="studentEmail">Email address <span>*</span></label><input id="studentEmail" name="studentEmail" type="email" placeholder="e.g. ananya@example.com" required maxlength="100">
+      <label for="studentCourse">Course <span>*</span></label>
+      <select id="studentCourse" name="studentCourse" required><option value="">Select a course</option><option>Web Development</option><option>Python Programming</option><option>Data Science</option><option>UI/UX Design</option><option>Java Programming</option><option>Cybersecurity</option></select>
+      <label for="studentStatus">Status</label><select id="studentStatus" name="studentStatus"><option>Active</option><option>Inactive</option></select>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelDialog">Cancel</button><button type="submit" class="primary-btn" id="saveStudent">Save Student</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
